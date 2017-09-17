@@ -4,10 +4,74 @@ import BoxTextCreator from "./BoxTextCreator.js";
 
 class MainScript{
     constructor(){
+
         this.number = 0;
         this.addEventsToButtons();
         this.addEventToHolst();
         this.addEventToOKbutton();
+
+        this.mass = [];
+
+        this.slide = 1;
+        this.addListenersToSlideButtons();
+
+        this. showFonOfTextOrNotShow();
+    }
+
+    showFonOfTextOrNotShow(){
+        const t = this;
+        const obj = document.getElementById("showTextFonOnOff");
+        obj.addEventListener("click", function () {
+            if(obj.innerHTML === "Скрыть"){
+                obj.innerHTML = "Показать";
+                for(let i = 0; i < t.number; i++){
+                    const box = document.getElementById("box" + i);
+                    box.style.backgroundColor = null;
+                }
+            } else {
+                obj.innerHTML = "Скрыть";
+                for(let i = 0; i < t.number; i++){
+                    const box = document.getElementById("box" + i);
+                    box.style.backgroundColor = "Peru";
+                }
+            }
+        });
+    }
+
+    changeSlide(){
+        const t = this;
+
+        document.getElementById("slideNumBox").innerHTML = t.slide.toString();
+        document.getElementById("rightMenu").hidden = true;
+
+        for(let i = 0; i < t.number; i++){
+            const box = document.getElementById("box" + i);
+            box.hidden = true;
+        }
+
+        for(let i = 0; i < t.number; i++){
+            const box = document.getElementById("box" + i);
+            if(t.mass[i] === t.slide){
+                box.hidden = false;
+            }
+        }
+
+    }
+
+
+
+    addListenersToSlideButtons(){
+        const t = this;
+
+        document.getElementById("bL").addEventListener("click", function(){
+           t.slide -= 1;
+           t.changeSlide();
+        });
+
+        document.getElementById("bR").addEventListener("click", function(){
+            t.slide += 1;
+            t.changeSlide();
+        });
     }
 
     addEventsToButtons() {
@@ -24,6 +88,8 @@ class MainScript{
             box.dx = 0;
             box.dy = 0;
             box.drag = false;
+            t.mass.push(t.slide);
+
             t.number += 1;
         });
 

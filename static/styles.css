@@ -38,6 +38,8 @@ body{
     height: 850px;
     background-color: #00FFFF;
     z-index: 1;
+
+    overflow: hidden;
 }
 
 .topClickLabel{
