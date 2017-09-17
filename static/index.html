@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SimplePresentation</title>
+    <link rel = "stylesheet" type = "text/css" href = "styles.css"/>
+</head>
+<body>
+
+
+<div id = "topMenu">
+    <p>
+        <span class = "splitter"></span>
+        <span class = "topClickLabel" id = "btnText">Текст</span>
+        <span class = "splitter"></span>
+        <span class = "topClickLabel" id = "btnImage">Картинка</span>
+        <span class = "splitter"></span>
+        <input type = 'color' id = "btnColor" hidden>
+        <span class = "topClickLabel" id = "btnFonColor">Фон</span>
+        <span class = "splitter"></span>
+    </p>
+</div>
+
+<div id = "rightMenu" hidden>
+    <p>
+        Свойства объекта&nbsp;&nbsp;&nbsp;
+        <i>
+            <span id = "nowObj"></span>
+        </i>
+    </p>
+
+    <hr>
+    <div class = "splitterVertical"></div>
+
+    <table>
+        <tr>
+            <td>
+                Позиция X&nbsp;&nbsp;&nbsp;
+            </td>
+            <td>
+                <input id = "t1" type = "text" class = "inputTextClass">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Позиция Y
+            </td>
+            <td>
+                <input id = "t2"  type = "text" class = "inputTextClass">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ширина
+            </td>
+            <td>
+                <input id = "t3"  type = "text" class = "inputTextClass">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Высота
+            </td>
+            <td><input  id = "t4" type = "text" class = "inputTextClass">
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Размер
+            </td>
+            <td><input  id = "t5" type = "text" class = "inputTextClass">
+            </td>
+        </tr>
+    </table>
+
+    <div class = "splitterVertical"></div>
+    <hr>
+    <div class = "splitterVertical"></div>
+    Текст
+    <div class = "splitterVertical"></div>
+    <textarea id = "t6"></textarea>
+    <div class = "splitterVertical"></div>
+    <hr>
+    <div class = "splitterVertical"></div>
+    <button id = "btnOK">Применить</button>
+</div>
+
+<div id = "sceneBox"></div>
+
+<script src = "scripts/MainResultScriptMaxim.js"></script>
+
+</body>
+</html>

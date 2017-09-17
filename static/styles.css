@@ -1,0 +1,88 @@
+body{
+    background-color: #808080;
+    margin-top: 0px;
+    margin-left: 0px;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+#topMenu{
+    position: absolute;
+    margin-left: 0px;
+    margin-top: 0px;
+    width: 1200px;
+    height: 50px;
+    background-color: #808080;
+    z-index: 2;
+}
+
+#rightMenu{
+    position: absolute;
+    margin-left: 1200px;
+    margin-top: 0px;
+    width: 300px;
+    height: 850px;
+    background-color: #808080;
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 50px;
+    z-index: 3;
+}
+
+#sceneBox{
+    position: absolute;
+    margin-left: 0px;
+    margin-top: 50px;
+    width: 1200px;
+    height: 850px;
+    background-color: #00FFFF;
+    z-index: 1;
+}
+
+.topClickLabel{
+    color: white;
+}
+
+.topClickLabel:hover{
+    cursor: pointer;
+    color: #6bff53;
+}
+
+.splitter{
+    padding-left: 30px;
+}
+
+.splitterVertical{
+    padding-top: 25px;
+}
+
+.inputTextClass{
+    width: 150px;
+    border: 3px double #0000FF;
+    font-size: 20px;
+}
+
+textarea{
+    width: 250px;
+    height: 300px;
+    resize: none;
+    border: 3px double #0000FF;
+    font-size: 20px;
+}
+
+button{
+    width: 250px;
+    height: 50px;
+    background-color: #0000FF;
+    color: white;
+    font-size: 20px;
+    outline: none;
+    border-width: 4px;
+    border-color: black;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #28688e;
+}
