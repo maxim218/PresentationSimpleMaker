@@ -198,9 +198,6 @@ class MainScript{
             t.number += 1;
         });
 
-        document.getElementById("btnImage").addEventListener("click", function () {
-            alert("Картинка");
-        });
 
         document.getElementById("btnFonColor").addEventListener("click", function () {
             document.getElementById("btnColor").click();
