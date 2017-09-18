@@ -8,6 +8,8 @@ export default class HTMLgetter{
 
         document.getElementById("resultTTT").value = "";
 
+        document.getElementById("wwwText").innerHTML = "HTML код презентации";
+
 
         this.mass = mass;
         this.slidesArr = [];
@@ -48,6 +50,14 @@ export default class HTMLgetter{
         answer += "</html>\n\n";
 
         document.getElementById("resultTTT").value = answer.toString();
+
+        console.log("---");
+        console.log("---");
+        console.log("---");
+        console.log(answer.toString());
+        console.log("---");
+        console.log("---");
+        console.log("---");
     }
 
     visitAllBoxes(){

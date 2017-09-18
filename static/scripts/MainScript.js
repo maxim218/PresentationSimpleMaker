@@ -2,18 +2,32 @@
 
 import BoxTextCreator from "./BoxTextCreator.js";
 import HTMLgetter from "./HTMLgetter.js";
+import JSONworker from "./JSONworker.js";
+
 
 class MainScript{
     constructor(){
 
+        console.log("---");
+        console.log("---");
+        console.log("---");
+
         document.getElementById("sceneBox").style.backgroundColor = "#14ffbd";
 
         this.number = 0;
+        this.mass = [];
+
+        // work with JSON from url
+        const jsonWorkerObj = new JSONworker();
+        this.number = jsonWorkerObj.getFieldNumber();
+        this.mass = jsonWorkerObj.getFieldMass();
+
+        console.log(this.number);
+        console.log(this.mass);
+
         this.addEventsToButtons();
         this.addEventToHolst();
         this.addEventToOKbutton();
-
-        this.mass = [];
 
         this.slide = 1;
         this.addListenersToSlideButtons();
@@ -22,6 +36,7 @@ class MainScript{
         this.getHTMLcodeOfPresentation();
 
         this.addEventToCloseBTN();
+
     }
 
     addEventToCloseBTN(){
@@ -132,6 +147,46 @@ class MainScript{
 
         document.getElementById("btnColor").addEventListener("input", function(){
             document.getElementById("sceneBox").style.backgroundColor = document.getElementById("btnColor").value;
+        });
+
+        document.getElementById("getJSONcode").addEventListener("click", function(){
+
+            let myObj = {
+                objArr: []
+            };
+
+            for(let i = 0; i < t.number; i++){
+               const box = document.getElementById("box" + i);
+               let obj = {};
+
+               obj.xx = box.style.marginLeft;
+               obj.yy = box.style.marginTop;
+               obj.ww = box.style.width;
+               obj.hh = box.style.height;
+               obj.ss = box.style.fontSize;
+               obj.slideNUm = t.mass[i];
+               obj.tt = box.innerHTML;
+
+               myObj.objArr.push(obj);
+            }
+
+
+            const jsonString = encodeURIComponent(JSON.stringify(myObj));
+
+            document.getElementById("fullScreenBox").hidden = false;
+            document.getElementById("resultBox").hidden = false;
+
+            document.getElementById("resultTTT").value = jsonString;
+
+            document.getElementById("wwwText").innerHTML = "JSON код проекта";
+
+            console.log("---");
+            console.log("---");
+            console.log("---");
+            console.log(jsonString);
+            console.log("---");
+            console.log("---");
+            console.log("---");
         });
     }
 

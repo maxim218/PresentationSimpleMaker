@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,9 +68,34 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+
+
+class BoxTextCreator{
+    constructor(number){
+        const boxHTMLcode = "<div id = 'box" + number + "' style = 'position: absolute; height: 100px; width: 100px; cursor: move; background-color: Peru; font-size: 20px; margin-left: 0px; margin-top: 0px;'><h1>&nbsp;&nbsp;" + number + "</h1></div>";
+        document.getElementById("sceneBox").innerHTML += boxHTMLcode;
+    }
+
+    getElement(number){
+        return document.getElementById("box" + number);
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = BoxTextCreator;
+;
+
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BoxTextCreator_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BoxTextCreator_js__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HTMLgetter_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__JSONworker_js__ = __webpack_require__(3);
+
+
 
 
 
@@ -79,14 +104,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 class MainScript{
     constructor(){
 
+        console.log("---");
+        console.log("---");
+        console.log("---");
+
         document.getElementById("sceneBox").style.backgroundColor = "#14ffbd";
 
         this.number = 0;
+        this.mass = [];
+
+        // work with JSON from url
+        const jsonWorkerObj = new __WEBPACK_IMPORTED_MODULE_2__JSONworker_js__["a" /* default */]();
+        this.number = jsonWorkerObj.getFieldNumber();
+        this.mass = jsonWorkerObj.getFieldMass();
+
+        console.log(this.number);
+        console.log(this.mass);
+
         this.addEventsToButtons();
         this.addEventToHolst();
         this.addEventToOKbutton();
-
-        this.mass = [];
 
         this.slide = 1;
         this.addListenersToSlideButtons();
@@ -95,6 +132,7 @@ class MainScript{
         this.getHTMLcodeOfPresentation();
 
         this.addEventToCloseBTN();
+
     }
 
     addEventToCloseBTN(){
@@ -206,6 +244,46 @@ class MainScript{
         document.getElementById("btnColor").addEventListener("input", function(){
             document.getElementById("sceneBox").style.backgroundColor = document.getElementById("btnColor").value;
         });
+
+        document.getElementById("getJSONcode").addEventListener("click", function(){
+
+            let myObj = {
+                objArr: []
+            };
+
+            for(let i = 0; i < t.number; i++){
+               const box = document.getElementById("box" + i);
+               let obj = {};
+
+               obj.xx = box.style.marginLeft;
+               obj.yy = box.style.marginTop;
+               obj.ww = box.style.width;
+               obj.hh = box.style.height;
+               obj.ss = box.style.fontSize;
+               obj.slideNUm = t.mass[i];
+               obj.tt = box.innerHTML;
+
+               myObj.objArr.push(obj);
+            }
+
+
+            const jsonString = encodeURIComponent(JSON.stringify(myObj));
+
+            document.getElementById("fullScreenBox").hidden = false;
+            document.getElementById("resultBox").hidden = false;
+
+            document.getElementById("resultTTT").value = jsonString;
+
+            document.getElementById("wwwText").innerHTML = "JSON код проекта";
+
+            console.log("---");
+            console.log("---");
+            console.log("---");
+            console.log(jsonString);
+            console.log("---");
+            console.log("---");
+            console.log("---");
+        });
     }
 
 
@@ -304,28 +382,6 @@ window.addEventListener("load", function(){
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-
-class BoxTextCreator{
-    constructor(number){
-        const boxHTMLcode = "<div id = 'box" + number + "' style = 'position: absolute; height: 100px; width: 100px; cursor: move; background-color: Peru; font-size: 20px; margin-left: 0px; margin-top: 0px;'><h1>&nbsp;&nbsp;" + number + "</h1></div>";
-        document.getElementById("sceneBox").innerHTML += boxHTMLcode;
-    }
-
-    getElement(number){
-        return document.getElementById("box" + number);
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = BoxTextCreator;
-;
-
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -339,6 +395,8 @@ class HTMLgetter{
         document.getElementById("resultBox").hidden = false;
 
         document.getElementById("resultTTT").value = "";
+
+        document.getElementById("wwwText").innerHTML = "HTML код презентации";
 
 
         this.mass = mass;
@@ -380,6 +438,14 @@ class HTMLgetter{
         answer += "</html>\n\n";
 
         document.getElementById("resultTTT").value = answer.toString();
+
+        console.log("---");
+        console.log("---");
+        console.log("---");
+        console.log(answer.toString());
+        console.log("---");
+        console.log("---");
+        console.log("---");
     }
 
     visitAllBoxes(){
@@ -401,6 +467,86 @@ class HTMLgetter{
 
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = HTMLgetter;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BoxTextCreator_js__ = __webpack_require__(0);
+
+
+
+
+class JSONworker{
+    constructor(){
+        this.number = 0;
+        this.mass = [];
+
+        let s = this.getQuery();
+        if(s.length > 0) {
+
+            let number = 0;
+            let mass = [];
+
+            s = decodeURIComponent(s);
+            let myJSON = JSON.parse(s);
+            let objArr = myJSON.objArr;
+
+            for (let i = 0; i < objArr.length; i++) {
+                const obj = objArr[i];
+                console.log(obj);
+
+                const boxTextCreator = new __WEBPACK_IMPORTED_MODULE_0__BoxTextCreator_js__["a" /* default */](number);
+                let box = boxTextCreator.getElement(number);
+
+                box.style.marginLeft = obj.xx;
+                box.style.marginTop = obj.yy;
+                box.style.width = obj.ww;
+                box.style.height = obj.hh;
+                box.style.fontSize = obj.ss;
+                box.dx = 0;
+                box.dy = 0;
+                box.drag = false;
+
+                box.innerHTML = obj.tt.toString();
+                mass[number] = obj.slideNUm;
+
+                box.hidden = true;
+
+                number++;
+            }
+
+            this.number = number;
+            this.mass = mass;
+        }
+
+        console.log("---");
+        console.log("---");
+        console.log("---");
+    }
+
+    getFieldNumber(){
+        return this.number;
+    }
+
+    getFieldMass(){
+        return this.mass;
+    }
+
+    getQuery(){
+        let s = location.search.toString();
+        let arr = s.split("");
+        arr[0] = "";
+        arr[1] = "";
+        arr[2] = "";
+        s = arr.join("");
+        console.log(s);
+        return s;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = JSONworker;
 
 
 /***/ })
