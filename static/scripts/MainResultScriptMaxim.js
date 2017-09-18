@@ -79,6 +79,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 class MainScript{
     constructor(){
 
+        document.getElementById("sceneBox").style.backgroundColor = "#14ffbd";
+
         this.number = 0;
         this.addEventsToButtons();
         this.addEventToHolst();
@@ -91,6 +93,15 @@ class MainScript{
 
         this.showFonOfTextOrNotShow();
         this.getHTMLcodeOfPresentation();
+
+        this.addEventToCloseBTN();
+    }
+
+    addEventToCloseBTN(){
+        document.getElementById("resultBTN").addEventListener("click", function(){
+            document.getElementById("fullScreenBox").hidden = true;
+            document.getElementById("resultBox").hidden = true;
+        });
     }
 
     getHTMLcodeOfPresentation(){
@@ -327,45 +338,48 @@ class BoxTextCreator{
 class HTMLgetter{
     constructor(mass){
 
+        document.getElementById("fullScreenBox").hidden = false;
+        document.getElementById("resultBox").hidden = false;
+
+        document.getElementById("resultTTT").value = "";
+
+
         this.mass = mass;
         this.slidesArr = [];
 
         for(let i = 0; i < 100; i++){
-            this.slidesArr.push("<div hidden id = 'slide_" + i + "'>");
+            this.slidesArr.push("\n<div hidden id = 'slide_" + i + "'>\n");
         }
 
         this.visitAllBoxes();
 
         for(let i = 0; i < 100; i++){
-            this.slidesArr[i] += "</div>";
+            this.slidesArr[i] += "</div>\n";
         }
-
-
 
         let answer = "";
 
         let colorString = document.getElementById("sceneBox").style.backgroundColor.toString();
 
-        answer = answer + "<!DOCTYPE html>";
-        answer = answer + "<html>";
-        answer = answer + "<head>";
-        answer = answer + "<meta charset='UTF-8'>";
-        answer = answer + "<title>Презентация</title>";
-        answer = answer + "<style> body { font-family: Geneva, Arial, Helvetica, sans-serif; background-color: " + colorString + ";} </style>";
-        answer = answer + "</head>";
-        answer = answer + "<body>";
+        answer = answer + "<!DOCTYPE html> \n";
+        answer = answer + "<html> \n";
+        answer = answer + "<head> \n";
+        answer = answer + "   <meta charset='UTF-8'> \n";
+        answer = answer + "   <title>Презентация</title> \n";
+        answer = answer + "   <style> \n      body { \n            font-family: Geneva, Arial, Helvetica, sans-serif; \n            background-color: " + colorString + ";\n      } \n   </style> \n";
+        answer = answer + "</head> \n";
+        answer = answer + "<body> \n";
 
         for(let i = 0; i < 100; i++){
-            answer = answer + this.slidesArr[i].toString();
+            if(this.slidesArr[i].toString().length >= 50) {
+                answer = answer + this.slidesArr[i].toString();
+            }
         }
 
-        answer += "<script> function hideAll(){for(let i = 0; i < 100; i++) document.getElementById('slide_' + i).hidden = true; }; </script>";
-        answer += "<script> let n = 0; window.onclick = function(){ n++; hideAll(); document.getElementById('slide_' + n).hidden = false; }; </script>";
+        answer += "\n</body>\n";
+        answer += "</html>\n\n";
 
-        answer += "</body>";
-        answer += "</html>";
-
-        console.log(answer);
+        document.getElementById("resultTTT").value = answer.toString();
     }
 
     visitAllBoxes(){
@@ -380,7 +394,7 @@ class HTMLgetter{
             const ss = parseInt(box.style.fontSize);
             const tt = box.innerHTML;
 
-            let s = "<div id = 'box" + i + "' style = 'position: absolute; margin-left: " + xx + "px; margin-top: " + yy + "px; width: " + ww + "px; height: " + hh + "px; font-size: " + ss + "px;'>" + tt + "</div>";
+            let s = "\n<div id = 'box" + i + "' style = 'position: absolute; margin-left: " + xx + "px; margin-top: " + yy + "px; width: " + ww + "px; height: " + hh + "px; font-size: " + ss + "px;'>\n" + tt + "\n</div>\n\n";
             this.slidesArr[slide] += s;
         }
     }

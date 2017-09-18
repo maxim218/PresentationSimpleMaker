@@ -6,6 +6,8 @@ import HTMLgetter from "./HTMLgetter.js";
 class MainScript{
     constructor(){
 
+        document.getElementById("sceneBox").style.backgroundColor = "#14ffbd";
+
         this.number = 0;
         this.addEventsToButtons();
         this.addEventToHolst();
@@ -18,6 +20,15 @@ class MainScript{
 
         this.showFonOfTextOrNotShow();
         this.getHTMLcodeOfPresentation();
+
+        this.addEventToCloseBTN();
+    }
+
+    addEventToCloseBTN(){
+        document.getElementById("resultBTN").addEventListener("click", function(){
+            document.getElementById("fullScreenBox").hidden = true;
+            document.getElementById("resultBox").hidden = true;
+        });
     }
 
     getHTMLcodeOfPresentation(){
