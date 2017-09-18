@@ -73,13 +73,17 @@ class MainScript{
         const t = this;
 
         document.getElementById("bL").addEventListener("click", function(){
-           t.slide -= 1;
-           t.changeSlide();
+            if(t.slide !== 1) {
+                t.slide -= 1;
+                t.changeSlide();
+            }
         });
 
         document.getElementById("bR").addEventListener("click", function(){
-            t.slide += 1;
-            t.changeSlide();
+            if(t.slide !== 80) {
+                t.slide += 1;
+                t.changeSlide();
+            }
         });
     }
 
@@ -98,6 +102,14 @@ class MainScript{
             box.dy = 0;
             box.drag = false;
             t.mass.push(t.slide);
+
+            const hideTypeString = document.getElementById("showTextFonOnOff").innerHTML.toString();
+            if(hideTypeString === "Показать"){
+                box.style.backgroundColor = null;
+            }
+            if(hideTypeString === "Скрыть"){
+                box.style.backgroundColor = "Peru";
+            }
 
             t.number += 1;
         });
@@ -167,14 +179,16 @@ class MainScript{
                 const ww = parseInt(box.style.width);
                 const hh = parseInt(box.style.height);
 
-                if(xx < xMouse && xMouse < xx + ww){
-                    if(yy < yMouse && yMouse < yy + hh){
-                        t.setAllDragFalse();
-                        box.drag = true;
-                        box.dx = xMouse - xx;
-                        box.dy = yMouse - yy;
+                if(box.hidden === false) {
+                    if (xx < xMouse && xMouse < xx + ww) {
+                        if (yy < yMouse && yMouse < yy + hh) {
+                            t.setAllDragFalse();
+                            box.drag = true;
+                            box.dx = xMouse - xx;
+                            box.dy = yMouse - yy;
 
-                        t.showBoxInfo(box);
+                            t.showBoxInfo(box);
+                        }
                     }
                 }
             }
@@ -189,11 +203,13 @@ class MainScript{
             const yMouse = event.pageY - 50;
             for(let i = 0; i < t.number; i++){
                 const box = document.getElementById("box" + i);
-                if(box.drag === true) {
-                    box.style.marginLeft = (xMouse - box.dx) + "px";
-                    box.style.marginTop = (yMouse - box.dy) + "px";
+                if(box.hidden === false) {
+                    if (box.drag === true) {
+                        box.style.marginLeft = (xMouse - box.dx) + "px";
+                        box.style.marginTop = (yMouse - box.dy) + "px";
 
-                    t.showBoxInfo(box);
+                        t.showBoxInfo(box);
+                    }
                 }
             }
         });
