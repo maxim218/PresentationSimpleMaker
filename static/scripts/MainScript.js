@@ -1,6 +1,7 @@
 "use strict";
 
 import BoxTextCreator from "./BoxTextCreator.js";
+import HTMLgetter from "./HTMLgetter.js";
 
 class MainScript{
     constructor(){
@@ -15,7 +16,15 @@ class MainScript{
         this.slide = 1;
         this.addListenersToSlideButtons();
 
-        this. showFonOfTextOrNotShow();
+        this.showFonOfTextOrNotShow();
+        this.getHTMLcodeOfPresentation();
+    }
+
+    getHTMLcodeOfPresentation(){
+        const t = this;
+        document.getElementById("getHTMLbutton").addEventListener("click", function(){
+             const htmlGetterObj = new HTMLgetter(t.mass);
+        });
     }
 
     showFonOfTextOrNotShow(){
@@ -94,7 +103,7 @@ class MainScript{
         });
 
         document.getElementById("btnImage").addEventListener("click", function () {
-
+            alert("Картинка");
         });
 
         document.getElementById("btnFonColor").addEventListener("click", function () {
