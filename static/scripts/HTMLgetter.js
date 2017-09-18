@@ -41,6 +41,9 @@ export default class HTMLgetter{
             }
         }
 
+        answer += "\n<script src = 'jquery-3.2.1.min.js'></script>\n";
+        answer += "\n<script src = 'presentationCode.js'></script>\n";
+
         answer += "\n</body>\n";
         answer += "</html>\n\n";
 
