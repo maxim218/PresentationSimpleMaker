@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SimplePresentation</title>
+    <style>
+        body{
+            background-color: #808080;
+            font-family: Geneva, Arial, Helvetica, sans-serif;
+            font-size: 20px;
+
+            margin: 50px;
+            color: white;
+        }
+
+        textarea{
+            width: 400px;
+            height: 150px;
+            resize: none;
+            border: 3px double #0000FF;
+            font-size: 20px;
+        }
+
+        button{
+            width: 400px;
+            height: 50px;
+            background-color: #0000FF;
+            color: white;
+            font-size: 20px;
+            outline: none;
+            border-width: 4px;
+            border-color: black;
+            border-style: solid;
+        }
+
+        button:hover{
+            cursor: pointer;
+            background-color: #28688e;
+        }
+
+        .splitterVertical{
+            padding-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>SimplePresentation</h1>
+<p>Разработчик: Колотовкин Максим</p>
+<hr>
+<div class = "splitterVertical"></div>
+<textarea id = 'tt'></textarea>
+<div class = "splitterVertical"></div>
+<button id = 'b1'>Открыть проект</button>
+<div class = "splitterVertical"></div>
+<hr>
+<div class = "splitterVertical"></div>
+<button id = 'b2'>Новый проект</button>
+<div class = "splitterVertical"></div>
+
+<script>
+    window.onload = function(){
+        document.getElementById("b2").onclick = function(){
+            window.location = "program.html";
+        };
+
+        document.getElementById("b1").onclick = function(){
+            const s = "program.html?x=" + document.getElementById("tt").value.toString();
+            window.location = s;
+        };
+    }
+</script>
+
+</body>
+</html>
