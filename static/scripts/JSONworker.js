@@ -17,6 +17,9 @@ export default class JSONworker{
             let myJSON = JSON.parse(s);
             let objArr = myJSON.objArr;
 
+            const fon = myJSON.fon;
+            document.getElementById("sceneBox").style.backgroundColor = fon;
+
             for (let i = 0; i < objArr.length; i++) {
                 const obj = objArr[i];
                 console.log(obj);

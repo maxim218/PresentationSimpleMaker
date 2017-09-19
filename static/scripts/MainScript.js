@@ -155,6 +155,8 @@ class MainScript{
                 objArr: []
             };
 
+            myObj.fon = document.getElementById("sceneBox").style.backgroundColor;
+
             for(let i = 0; i < t.number; i++){
                const box = document.getElementById("box" + i);
                let obj = {};
