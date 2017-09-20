@@ -37,6 +37,10 @@ class MainScript{
 
         this.addEventToCloseBTN();
 
+        // add two clicks
+        document.getElementById("bR").click();
+        document.getElementById("bL").click();
+
     }
 
     addEventToCloseBTN(){
